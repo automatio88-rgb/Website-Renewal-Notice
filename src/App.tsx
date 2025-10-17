@@ -19,10 +19,12 @@ function App() {
 
   console.log('Current route:', currentRoute);
 
+  // Show Provider Portal for /portal route
   if (currentRoute === '/portal') {
     return <ProviderPortal />;
   }
 
+  // Show Client Portal for all other routes (/, /client, etc.)
   return <ClientRenewalNotice />;
 }
 
