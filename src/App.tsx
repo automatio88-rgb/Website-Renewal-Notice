@@ -16,20 +16,6 @@ function AppContent() {
     clientName: string;
     domain: string;
   } | null>(null);
-  const [currentRoute, setCurrentRoute] = useState(useCurrentRoute());
-
-  useEffect(() => {
-    const handleHashChange = () => {
-      setCurrentRoute(useCurrentRoute());
-    };
-
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
-
-  if (currentRoute === '/client' || currentRoute === '/') {
-    return <ClientRenewalNotice />;
-  }
 
   if (loading) {
     return (
@@ -85,6 +71,21 @@ function AppContent() {
 }
 
 function App() {
+  const [currentRoute, setCurrentRoute] = useState(useCurrentRoute());
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCurrentRoute(useCurrentRoute());
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  if (currentRoute === '/client' || currentRoute === '/') {
+    return <ClientRenewalNotice />;
+  }
+
   return (
     <AuthProvider>
       <AppContent />
