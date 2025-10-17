@@ -1,12 +1,9 @@
 import React from 'react';
 import { LogIn, Clock, Globe, CreditCard } from 'lucide-react';
-import { useNavigate } from './useNavigate';
 
 export function ClientRenewalNotice() {
-  const navigate = useNavigate();
-
   const handleProviderLogin = () => {
-    navigate('/portal');
+    window.location.hash = '/portal';
   };
 
   return (
