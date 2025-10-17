@@ -4,8 +4,8 @@ import { LogIn, Clock, Globe, CreditCard } from 'lucide-react';
 export function ClientRenewalNotice() {
   const handleProviderLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log('Provider Login clicked');
-    window.location.hash = '#/portal';
+    console.log('Provider Login clicked - navigating to admin portal');
+    window.location.hash = '/portal';
   };
 
   return (
