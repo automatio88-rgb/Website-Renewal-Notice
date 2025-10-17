@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { LoginPage } from './components/LoginPage';
 import { Sidebar } from './components/Sidebar';
@@ -6,6 +6,8 @@ import { Dashboard } from './components/Dashboard';
 import { ClientsTable } from './components/ClientsTable';
 import { Settings } from './components/Settings';
 import { EmailNotification } from './components/EmailNotification';
+import { ClientRenewalNotice } from './components/ClientRenewalNotice';
+import { useCurrentRoute } from './components/useNavigate';
 
 function AppContent() {
   const { user, loading } = useAuth();
@@ -14,6 +16,20 @@ function AppContent() {
     clientName: string;
     domain: string;
   } | null>(null);
+  const [currentRoute, setCurrentRoute] = useState(useCurrentRoute());
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCurrentRoute(useCurrentRoute());
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  if (currentRoute === '/client' || currentRoute === '/') {
+    return <ClientRenewalNotice />;
+  }
 
   if (loading) {
     return (
